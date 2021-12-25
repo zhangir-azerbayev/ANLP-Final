@@ -11,8 +11,8 @@ def read_mathqapython(path):
     return mathqapython_list
 
 class MathQAPython(torch.utils.data.Dataset): 
-    def __init__(self, instance_list, tokenizer, max_length): 
-        self.data = instance_list 
+    def __init__(self, sorted_instances, tokenizer, max_length): 
+        self.data = sorted_instances
         self.tokenizer = tokenizer 
         self.max_length = max_length
     

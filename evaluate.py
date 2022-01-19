@@ -20,7 +20,7 @@ from dataset import read_mathqapython
 
 from execution import semisafe_evaluate
 
-device = 'cuda:1'
+device = 'cuda:4'
 
 model_path = sys.argv[1]
 outfile = sys.argv[2]
@@ -30,9 +30,7 @@ print('loading model and data...')
 model = GPTNeoForCausalLM.from_pretrained(model_path).to(device)
 
 # Test set
-data = read_mathqapython('data/mathqapython_test.json')
-random.shuffle(data)
-data = data[:1000]
+data = read_mathqapython('data/mathqapython_dev.json')
 
 # tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("EleutherAI/gpt-neo-125M")
@@ -108,7 +106,7 @@ to_dump = {'pass1': pass1average,
         'results': results}
 
 with open(outfile, 'w') as fle: 
-    json.dump(to_dump, fle)
+    json.dump(to_dump, fle, indent=4, separators=(',', ': '))
 
 
 
